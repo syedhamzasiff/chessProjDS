@@ -43,7 +43,7 @@ public abstract class Tile {
         }
     }
 
-    private Tile(int tileCoordinate) {
+    Tile(int tileCoordinate) {
         this.tileCoordinate = tileCoordinate;
     }
     public abstract boolean tileOccupied();
