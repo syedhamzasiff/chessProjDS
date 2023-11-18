@@ -3,6 +3,7 @@ package board;
 import Alliance.Alliance;
 import pieces.*;
 import player.BlackPlayer;
+import player.Player;
 import player.WhitePlayer;
 
 import java.util.ArrayList;
@@ -147,5 +148,13 @@ public class Board {
 
     public Collection<Piece> getBlackPieces() {
         return this.blackPieces;
+    }
+
+    public Player blackPlayer() {
+        return this.blackPlayer;
+    }
+
+    public Player whitePlayer() {
+        return this.whitePlayer;
     }
 }

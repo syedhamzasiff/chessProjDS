@@ -1,5 +1,6 @@
 package player;
 
+import Alliance.Alliance;
 import board.Board;
 import board.Move;
 import pieces.King;
@@ -28,5 +29,31 @@ public abstract class Player {
         throw new RuntimeException("Should not reach here! Not a valid board!");
     }
 
+    public boolean isMoveLegal (final Move move) {
+        return this.legalMoves.contains(move);
+    }
+
+    public boolean isInCheck() {
+        return false;
+    }
+
+    public boolean isInCheckMate() {
+        return false;
+    }
+
+    public boolean isCastled() {
+        return false;
+    }
+
+    public MoveTransition makeMove (final Move move) {
+        return null;
+    }
+
+    public boolean isInStaleMate() {
+        return false;
+    }
+
     public abstract Collection<Piece> getActivePieces ();
+    public abstract Alliance getAlliance ();
+    public abstract Player getOpponent ();
 }
