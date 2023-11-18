@@ -16,7 +16,7 @@ public class Queen extends Piece{
 
     // queen is essentially rook + bishop
 
-    Queen(int piecePosition, Alliance pieceAlliance) {
+    public Queen(int piecePosition, Alliance pieceAlliance) {
         super(piecePosition, pieceAlliance);
     }
 
