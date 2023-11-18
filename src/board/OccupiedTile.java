@@ -20,4 +20,12 @@ public final class OccupiedTile extends Tile {
     public Piece getPiece() {
         return this.pieceOnTile;
     }
+    @Override
+    public String toString() {
+        if (getPiece().getPieceAlliance().isBlack()) {
+            return getPiece().toString().toLowerCase();
+        } else {
+            return getPiece().toString().toUpperCase();
+        }
+    }
 }

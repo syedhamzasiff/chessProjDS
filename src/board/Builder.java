@@ -3,6 +3,7 @@ package board;
 import Alliance.Alliance;
 import pieces.Piece;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Builder {
@@ -20,6 +21,7 @@ public class Builder {
     Alliance nextMoveMaker;
 
     public Builder() {
+        this.boardConfig = new HashMap<>();
     }
 
     /*

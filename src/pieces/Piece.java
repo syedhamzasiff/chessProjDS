@@ -33,5 +33,29 @@ public abstract class Piece {
     public int getPiecePosition(){
         return piecePosition;
     }
+    public enum PieceType{
+        /*
+        This code defines an enumeration (enum) in Java called PieceType,
+        representing different types of chess pieces.
+        Each enum constant corresponds to a specific chess piece type:
+        PAWN, KNIGHT, ROOK, QUEEN, and KING.
+         */
+        PAWN("P"),
+        KNIGHT("N"),
+        ROOK("R"),
+        BISHOP("B"),
+        QUEEN("Q"),
+        KING("K");
+        private String pieceName; //Each enum constant has an associated
+
+
+        PieceType(final String pieceName) { //The constructor initializes the pieceName field for each enum constant.
+            this.pieceName = pieceName;
+        }
+        @Override
+        public String toString() {
+            return this.pieceName;
+        }
+    }
 
 }

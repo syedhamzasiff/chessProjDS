@@ -17,12 +17,42 @@ public class Board {
     private final Collection<Piece> whitePieces;
     private final Collection<Piece> blackPieces;
 
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < BoardUtils.NUM_TILES; i++) {
+            final String tileText = this.gameBoard.get(i).toString();
+            builder.append(String.format("%3s", tileText));
+            if ((i+1) % BoardUtils.NUM_TILES_PER_ROW == 0){
+                builder.append("\n");
+            }
+        }
+        return builder.toString();
+    }
+
     protected Board(Builder builder) {
         //calling this constructor makes a gameBoard
         this.gameBoard = createGameBoard(builder);
         //populate a list of tiles numbered 0-63
         this.whitePieces = calculateActivePieces(this.gameBoard, Alliance.WHITE);
         this.blackPieces = calculateActivePieces(this.gameBoard, Alliance.BLACK);
+
+        final Collection<Move> whiteStandardLegalMoves = calculateLegalMove(this.whitePieces);
+        final Collection<Move> blackStandardLegalMoves = calculateLegalMove(this.blackPieces);
+    }
+    private Collection<Move> calculateLegalMove(final Collection<Piece> pieces){
+        final List<Move> legalMoves = new ArrayList<>();
+
+        for (final Piece piece : pieces) {
+            if (piece != null) {
+                Collection<Move> pieceLegalMoves = piece.calculateLegalMoves(this);
+                if (pieceLegalMoves != null) {
+                    legalMoves.addAll(pieceLegalMoves);
+                }
+            }
+        }
+        return List.copyOf(legalMoves);
+        //ImmutableList.copyOf(legalMoves)
     }
     private Collection<Piece> calculateActivePieces(final List<Tile> gameBoard, final Alliance alliance){
         //tracks the chosen alliance active pieces
@@ -97,6 +127,6 @@ public class Board {
 
         //white to move
         builder.setMoveMaker(Alliance.WHITE);
-        return null; // TODO decide the return statement
+        return builder.build();
     }
 }
