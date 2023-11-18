@@ -36,6 +36,7 @@ public static final class MajorMove extends Move {
             final Builder builder = new Builder();
             for (final Piece piece: this.board.currentPlayer().getActivePieces()){//traverse through all the current pieces
                 //TODO hashcode and equals for pieces
+                //anytime you wanna interact w collections, you need to override the hash and equals to method
                 if (!this.movedPiece.equals(piece)){ //the not moved pieces must be just placed on the new outbound board
                     builder.setPiece(piece);
                 }
