@@ -16,18 +16,19 @@ public abstract class Move {
         return this.destinationCoordinate;
     }
     public abstract Board execute();
+    public Piece getMovedPiece(){
+        return this.movedPiece;
+    }
 
 public static final class MajorMove extends Move {
 
         public MajorMove(final Board board, final Piece movedPiece, final int destinationCoordinate) {
             super(board, movedPiece, destinationCoordinate);
         }
-
         /*
-        performing a move doesnt mean you are going to mutate the board, it means that you will materialise a new board to existence
+        performing a move doesn't mean you are going to mutate the board, it means that you will materialise a new board to existence
         move has a handle coming into this new member field
         when you execute a move, it is going to return a new board, not mutate the final board that was passed
-
          */
         @Override
         public Board execute() {
@@ -44,7 +45,7 @@ public static final class MajorMove extends Move {
                 builder.setPiece(piece); //same thing for the enemy pieces
             }
             //move the moved piece
-            builder.setPiece(null);
+            builder.setPiece(this.movedPiece.movePiece(this));
             //set the move maker to the opponent for the next turn
             builder.setMoveMaker(this.board.currentPlayer().getOpponent().getAlliance());
             return builder.build();

@@ -52,6 +52,11 @@ public class Rook extends Piece{
         return null; // had to do this cos line 51 giving error
     }
 
+    @Override
+    public Rook movePiece(Move move) {
+        return new Rook(move.getDestinationCoordinate(), move.getMovedPiece().getPieceAlliance());
+    }
+
     private static boolean isFirstColumnExclusion (final int currentPosition, final int candidateOffset) {
         return BoardUtils.FIRST_COLUMN[currentPosition] && ((candidateOffset == -1));
     }

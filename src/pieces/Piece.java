@@ -32,6 +32,7 @@ public abstract class Piece {
 
     public abstract Collection<Move> calculateLegalMoves (final Board board); // checks for legal moves of each piece
 
+    public abstract Piece movePiece(Move move); //take in a move and apply it to the existing piece that we are on and give a new piece that is just like the old piece with an updated position - keeping things immutable
     public int getPiecePosition(){
         return piecePosition;
     }
