@@ -97,5 +97,6 @@ public class Board {
 
         //white to move
         builder.setMoveMaker(Alliance.WHITE);
+        return null; // TODO decide the return statement
     }
 }
