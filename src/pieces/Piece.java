@@ -9,13 +9,15 @@ import java.util.Collection;
 
 public abstract class Piece {
 
+    protected final PieceType pieceType;
     protected final int piecePosition; // position of piece on the board
     protected final Alliance pieceAlliance; // tells if the piece is of the black or white team
     protected final boolean isFirstMove;
 
-    Piece (final int piecePosition, final Alliance pieceAlliance) {
+    Piece (final PieceType pieceType, final int piecePosition, final Alliance pieceAlliance) {
         this.pieceAlliance = pieceAlliance;
         this.piecePosition = piecePosition;
+        this.pieceType = pieceType;
         //TODO more work here
         this.isFirstMove = false;
     }
@@ -33,6 +35,11 @@ public abstract class Piece {
     public int getPiecePosition(){
         return piecePosition;
     }
+
+    public PieceType getPieceType() {
+        return this.pieceType;
+    }
+
     public enum PieceType{
         /*
         This code defines an enumeration (enum) in Java called PieceType,
@@ -40,12 +47,42 @@ public abstract class Piece {
         Each enum constant corresponds to a specific chess piece type:
         PAWN, KNIGHT, ROOK, QUEEN, and KING.
          */
-        PAWN("P"),
-        KNIGHT("N"),
-        ROOK("R"),
-        BISHOP("B"),
-        QUEEN("Q"),
-        KING("K");
+        PAWN("P") {
+            @Override
+            public boolean isKing() {
+                return false;
+            }
+        },
+        KNIGHT("N") {
+            @Override
+            public boolean isKing() {
+                return false;
+            }
+        },
+        ROOK("R") {
+            @Override
+            public boolean isKing() {
+                return false;
+            }
+        },
+        BISHOP("B") {
+            @Override
+            public boolean isKing() {
+                return false;
+            }
+        },
+        QUEEN("Q") {
+            @Override
+            public boolean isKing() {
+                return false;
+            }
+        },
+        KING("K") {
+            @Override
+            public boolean isKing() {
+                return true;
+            }
+        };
         private String pieceName; //Each enum constant has an associated
 
 
@@ -56,6 +93,9 @@ public abstract class Piece {
         public String toString() {
             return this.pieceName;
         }
+
+        public abstract boolean isKing();
+
     }
 
 }

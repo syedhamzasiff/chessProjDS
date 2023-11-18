@@ -2,6 +2,8 @@ package board;
 
 import Alliance.Alliance;
 import pieces.*;
+import player.BlackPlayer;
+import player.WhitePlayer;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,6 +19,11 @@ public class Board {
     private final Collection<Piece> whitePieces;
     private final Collection<Piece> blackPieces;
 
+    private final WhitePlayer whitePlayer;
+    private final BlackPlayer blackPlayer;
+
+
+
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
@@ -30,7 +37,7 @@ public class Board {
         return builder.toString();
     }
 
-    protected Board(Builder builder) {
+    private Board(final Builder builder) {
         //calling this constructor makes a gameBoard
         this.gameBoard = createGameBoard(builder);
         //populate a list of tiles numbered 0-63
@@ -39,6 +46,10 @@ public class Board {
 
         final Collection<Move> whiteStandardLegalMoves = calculateLegalMove(this.whitePieces);
         final Collection<Move> blackStandardLegalMoves = calculateLegalMove(this.blackPieces);
+
+        this.whitePlayer = new WhitePlayer(this, whiteStandardLegalMoves, blackStandardLegalMoves);
+        this.blackPlayer = new BlackPlayer(this, whiteStandardLegalMoves, blackStandardLegalMoves);
+     // this.currentPlayer = builder.nextMoveMaker.choosePlayer(this.whitePlayer, this.blackPLayer);
     }
     private Collection<Move> calculateLegalMove(final Collection<Piece> pieces){
         final List<Move> legalMoves = new ArrayList<>();
@@ -128,5 +139,13 @@ public class Board {
         //white to move
         builder.setMoveMaker(Alliance.WHITE);
         return builder.build();
+    }
+
+    public Collection<Piece> getWhitePieces() {
+        return this.whitePieces;
+    }
+
+    public Collection<Piece> getBlackPieces() {
+        return this.blackPieces;
     }
 }
