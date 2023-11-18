@@ -58,7 +58,7 @@ public class Pawn extends Piece{
                     }
                 }
             }
-            }
+        }
         return null;
     }
     @Override
