@@ -1,5 +1,9 @@
 package Alliance;
 
+import player.BlackPlayer;
+import player.Player;
+import player.WhitePlayer;
+
 public enum Alliance {
     BLACK {
         @Override
@@ -17,10 +21,10 @@ public enum Alliance {
             return false;
         }
 
-//        @Override
-//        public Player choosePlayer(WhitePlayer whitePlayer, BlackPlayer blackPlayer) {
-//            return blackPlayer;
-//        }
+        @Override
+        public Player choosePlayer(final WhitePlayer whitePlayer, final BlackPlayer blackPlayer) {
+            return blackPlayer;
+        }
     },
     WHITE {
         @Override
@@ -38,15 +42,17 @@ public enum Alliance {
             return true;
         }
 
-//        @Override
-//        public Player choosePlayer(WhitePlayer whitePlayer, BlackPlayer blackPlayer) {
-//            return whitePlayer;
-//        }
+        @Override
+        public Player choosePlayer(final WhitePlayer whitePlayer, final BlackPlayer blackPlayer) {
+            return whitePlayer;
+        }
     };
 
     public abstract int getDirection();
     public abstract boolean isBlack();
     public abstract boolean isWhite();
 
-    //public abstract Player choosePlayer(WhitePlayer whitePlayer, BlackPlayer blackplayer);
+    public abstract Player choosePlayer(WhitePlayer whitePlayer, BlackPlayer blackPlayer);
+
+
 }

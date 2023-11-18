@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class Board {
+public final class Board {
     /*
     using list because you cant have an immutable list in java but
     you can have an immutable list
@@ -19,10 +19,9 @@ public class Board {
     private final List<Tile> gameBoard;
     private final Collection<Piece> whitePieces;
     private final Collection<Piece> blackPieces;
-
     private final WhitePlayer whitePlayer;
     private final BlackPlayer blackPlayer;
-
+    private final Player currentPlayer;
 
 
     @Override
@@ -38,7 +37,7 @@ public class Board {
         return builder.toString();
     }
 
-    private Board(final Builder builder) {
+    Board(final Builder builder) {
         //calling this constructor makes a gameBoard
         this.gameBoard = createGameBoard(builder);
         //populate a list of tiles numbered 0-63
@@ -50,7 +49,7 @@ public class Board {
 
         this.whitePlayer = new WhitePlayer(this, whiteStandardLegalMoves, blackStandardLegalMoves);
         this.blackPlayer = new BlackPlayer(this, whiteStandardLegalMoves, blackStandardLegalMoves);
-     // this.currentPlayer = builder.nextMoveMaker.choosePlayer(this.whitePlayer, this.blackPLayer);
+        this.currentPlayer = builder.nextMoveMaker.choosePlayer(this.whitePlayer, this.blackPlayer);
     }
     private Collection<Move> calculateLegalMove(final Collection<Piece> pieces){
         final List<Move> legalMoves = new ArrayList<>();
@@ -156,5 +155,8 @@ public class Board {
 
     public Player whitePlayer() {
         return this.whitePlayer;
+    }
+    public Player currentPlayer() {
+        return this.currentPlayer;
     }
 }
