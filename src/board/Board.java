@@ -8,6 +8,7 @@ import player.WhitePlayer;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public final class Board {
@@ -159,4 +160,22 @@ public final class Board {
     public Player currentPlayer() {
         return this.currentPlayer;
     }
+    public List<Move> getAllLegalMoves() {
+        List<Move> allLegalMoves = new ArrayList<>();
+        allLegalMoves.addAll(whitePlayer.getLegalMoves());
+        allLegalMoves.addAll(blackPlayer.getLegalMoves());
+
+        return Collections.unmodifiableList(allLegalMoves);
+    }
+
+    /*
+    public Iterable<Move> getAllLegalMoves() {
+        return Iterables.unmodifiableIterable(Iterables.concat(this.whitePlayer.getLegalMoves(), this.blackPlayer.getLegalMoves()))):
+
+         in summary, this method is returning an unmodifiable iterable containing all legal moves from both the white player and the black player in the game. This design choice ensures that the returned iterable cannot be modified externally, providing a level of immutability to the collection of legal moves.
+        In summary, while Iterable is a more general interface that represents any collection that can be iterated, List is a more specific interface representing an ordered collection with index-based access. All lists are iterable, but not all iterables are lists
+
+     */
+
+
 }
