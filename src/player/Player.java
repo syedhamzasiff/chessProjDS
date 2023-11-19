@@ -8,6 +8,7 @@ import pieces.Piece;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public abstract class Player {
@@ -20,8 +21,13 @@ public abstract class Player {
     Player(final Board board, final Collection<Move> legalMoves, final Collection<Move> opponentMoves) {
         this.board = board;
         this.playerKing = establishKing();
-        this.legalMoves = legalMoves;
+        List<Move> concatenatedMoves = new ArrayList<>(legalMoves.size() + calculateKingCastles(legalMoves, opponentMoves).size());
+        concatenatedMoves.addAll(legalMoves);
+        concatenatedMoves.addAll(calculateKingCastles(legalMoves, opponentMoves));
+        //this.legalMoves = ImmutableList.copyOf(Iterables.concat(legalMoves, calculateKingCastles(legalMoves, opponentMoves)));
+        this.legalMoves = Collections.unmodifiableList(concatenatedMoves);
         this.isInCheck = !Player.calculateAttacksOnTile(this.playerKing.getPiecePosition(), opponentMoves).isEmpty();
+
     }
 
     protected static Collection<Move> calculateAttacksOnTile(int piecePosition, Collection<Move> moves) {
