@@ -1,6 +1,7 @@
 package board;
 
 import Alliance.Alliance;
+import pieces.Pawn;
 import pieces.Piece;
 
 import java.util.HashMap;
@@ -19,6 +20,7 @@ public class Builder {
     //map the tile id of the chess board to the given piece on that tile id
     Map<Integer, Piece> boardConfig;
     Alliance nextMoveMaker;
+    Pawn enPassantPawn;
 
     public Builder() {
         this.boardConfig = new HashMap<>();
@@ -39,5 +41,9 @@ public class Builder {
 
     public Board build() {
         return new Board(this);
+    }
+
+    public void setEnPassantPawn(Pawn enPassantPawn) {
+        this.enPassantPawn = enPassantPawn;
     }
 }
