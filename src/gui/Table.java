@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static board.Move.*;
 import static javax.swing.SwingUtilities.isLeftMouseButton;
 import static javax.swing.SwingUtilities.isRightMouseButton;
 
@@ -28,13 +29,13 @@ public class Table {
 
     private final JFrame gameFrame;
     private final BoardPanel boardPanel;
-    private final Board chessBoard;
+    private Board chessBoard;
 
     private Tile sourceTile;
     private Tile destinationTile;
     private Piece humanMovedPiece;
 
-    private final static Dimension OUTER_FRAME_DIMENSION = new Dimension(600, 600);
+    private final static Dimension OUTER_FRAME_DIMENSION = new Dimension(800, 800);
     private final static Dimension BOARD_PANEL_DIMENSION = new Dimension(400, 350);
     private final static Dimension TILE_PANEL_DIMENSION = new Dimension(10, 10);
     private static String defaultPieceImagesPath = "art/";
@@ -99,7 +100,16 @@ public class Table {
             }
             setPreferredSize(BOARD_PANEL_DIMENSION);
             validate();
+        }
 
+        public void drawBoard(final Board board) {
+            removeAll();
+            for (final TilePanel tilePanel : boardTiles) {
+                tilePanel.drawTile(board);
+                add(tilePanel);
+            }
+            validate();
+            repaint();
         }
     }
 
@@ -129,9 +139,22 @@ public class Table {
                             }
                         } else {
                             destinationTile = chessBoard.getTile(tileId);
-                            final Move move = null;
+                            final Move move = MoveFactory.createMove(chessBoard, sourceTile.getTileCoordinate(), destinationTile.getTileCoordinate());
                             final MoveTransition transition = chessBoard.currentPlayer().makeMove(move);
+                            if (transition.getMoveStatus().isDone()) {
+                                chessBoard = transition.getTransitionBoard();
+                                // TODO work to do
+                            }
+                            sourceTile = null;
+                            destinationTile = null;
+                            humanMovedPiece = null;
                         }
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                boardPanel.drawBoard(chessBoard);
+                            }
+                        });
                     }
                 }
 
@@ -185,5 +208,11 @@ public class Table {
             }
         }
 
+        public void drawTile(final Board board) {
+            assignTileColor();
+            assignTilePieceIcon(board);
+            validate();
+            repaint();
+        }
     }
 }
