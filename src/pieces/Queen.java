@@ -17,7 +17,11 @@ public class Queen extends Piece{
     // queen is essentially rook + bishop
 
     public Queen(int piecePosition, Alliance pieceAlliance) {
-        super(PieceType.QUEEN, piecePosition, pieceAlliance);
+        super(PieceType.QUEEN, piecePosition, pieceAlliance, true);
+    }
+
+    public Queen(int piecePosition, Alliance pieceAlliance, final boolean isFirstMove) {
+        super(PieceType.QUEEN, piecePosition, pieceAlliance, isFirstMove);
     }
 
     @Override

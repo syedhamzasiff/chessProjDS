@@ -3,6 +3,7 @@ package board;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class BoardUtils {
     public static final boolean[] FIRST_COLUMN = initColumn(0);
@@ -23,6 +24,7 @@ public class BoardUtils {
     public static final int NUM_TILES_PER_ROW = 8;
 
     public static final List<String> ALGEBRAIC_NOTATION = initializeAlgebraicNotation();
+    public static final Map<String, Integer> POSITION_TO_COORDINATE = initializePositionToCoordinateMap();
 
     private BoardUtils() {
         throw new RuntimeException("You cannot instantiate me!");
@@ -44,9 +46,13 @@ public class BoardUtils {
         } while(rowNumber % NUM_TILES_PER_ROW != 0);
         return row;
     }
+
+
     public static String getPositionAtCoordinate(final int coordinate) {
         return ALGEBRAIC_NOTATION.get(coordinate);
     }
+
+
     private static List<String> initializeAlgebraicNotation() {
         return Collections.unmodifiableList(Arrays.asList(
                 "a8", "b8", "c8", "d8", "e8", "f8", "g8", "h8",
@@ -64,6 +70,16 @@ public class BoardUtils {
     public static boolean isValidTileCoordinate(final int coordinate) {
         return coordinate >= 0 && coordinate < 64; // checks if the tile is in or out of the board bound
     }
+
+    public static int getCoordinateAtPosition(final String position) {
+        return POSITION_TO_COORDINATE.get(position);
+    }
+
+    private static Map<String, Integer> initializePositionToCoordinateMap() {
+        return null; // TODO vid 37 ended here
+    }
+
+
 
 
 }

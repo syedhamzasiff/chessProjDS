@@ -24,12 +24,14 @@ public abstract class Move {
         this.movedPiece = null;
         this.isFirstMove = false;
     }
+
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + this.destinationCoordinate;
         result = prime * result + this.movedPiece.hashCode();
+        result = prime * result + this.movedPiece.getPiecePosition();
         return result;
     }
     @Override
@@ -111,6 +113,8 @@ public abstract class Move {
         public boolean equals(final Object other) {
             return this == other || other instanceof MajorMove && super.equals(other);
         }
+
+
         @Override
         public String toString() {
             return movedPiece.getPieceType().toString() + BoardUtils.getPositionAtCoordinate(this.destinationCoordinate);

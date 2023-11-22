@@ -17,7 +17,11 @@ public class Knight extends Piece{
     private static final int[] CANDIDATE_MOVE_COORDINATES = {-17, -15, -10, -6, 6, 10, 15, 17}; // possible positions for the move
 
     public Knight(int piecePosition, Alliance pieceAlliance) {
-        super(PieceType.KNIGHT, piecePosition, pieceAlliance);
+        super(PieceType.KNIGHT, piecePosition, pieceAlliance, true);
+    }
+
+    public Knight(int piecePosition, Alliance pieceAlliance, final boolean isFirstMove) {
+        super(PieceType.KNIGHT, piecePosition, pieceAlliance, isFirstMove);
     }
 
     @Override
