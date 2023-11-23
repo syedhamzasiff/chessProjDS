@@ -1,5 +1,6 @@
 package Alliance;
 
+import board.BoardUtils;
 import player.BlackPlayer;
 import player.Player;
 import player.WhitePlayer;
@@ -14,6 +15,13 @@ public enum Alliance {
         public int getOppositeDirection(){
             return -1;
         }
+
+
+        @Override
+        public boolean isPawnPromotionSquare(int position) {
+            return BoardUtils.FIRST_COLUMN[position];
+        }
+
         @Override
         public boolean isBlack() {
             return true;
@@ -39,6 +47,12 @@ public enum Alliance {
         public int getOppositeDirection(){
             return 1;
         }
+
+        @Override
+        public boolean isPawnPromotionSquare(int position) {
+            return BoardUtils.EIGHTH_RANK[position];
+        }
+
         @Override
         public boolean isBlack() {
             return false;
@@ -59,7 +73,8 @@ public enum Alliance {
     public abstract boolean isBlack();
     public abstract boolean isWhite();
     public abstract int getOppositeDirection();
-
+    //whether it has reached a promotion square
+    public abstract boolean isPawnPromotionSquare(int position);
     public abstract Player choosePlayer(WhitePlayer whitePlayer, BlackPlayer blackPlayer);
 
 
