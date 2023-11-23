@@ -39,6 +39,10 @@ public abstract class Piece {
         return this.pieceAlliance;
     }
 
+    public int getPieceValue() {
+        return this.pieceType.getPieceValue();
+    }
+
     public boolean isFirstMove() {
         return this.isFirstMove;
     }
@@ -77,7 +81,7 @@ public abstract class Piece {
         Each enum constant corresponds to a specific chess piece type:
         PAWN, KNIGHT, ROOK, QUEEN, and KING.
          */
-        PAWN("P") {
+        PAWN(100, "P") {
             @Override
             public boolean isKing() {
                 return false;
@@ -88,7 +92,7 @@ public abstract class Piece {
                 return false;
             }
         },
-        KNIGHT("N") {
+        KNIGHT(300, "N") {
             @Override
             public boolean isKing() {
                 return false;
@@ -99,7 +103,7 @@ public abstract class Piece {
                 return false;
             }
         },
-        ROOK("R") {
+        ROOK(500, "R") {
             @Override
             public boolean isKing() {
                 return false;
@@ -110,7 +114,7 @@ public abstract class Piece {
                 return true;
             }
         },
-        BISHOP("B") {
+        BISHOP(300, "B") {
             @Override
             public boolean isKing() {
                 return false;
@@ -121,7 +125,7 @@ public abstract class Piece {
                 return false;
             }
         },
-        QUEEN("Q") {
+        QUEEN(900, "Q") {
             @Override
             public boolean isKing() {
                 return false;
@@ -132,7 +136,7 @@ public abstract class Piece {
                 return false;
             }
         },
-        KING("K") {
+        KING(10000, "K") {
             @Override
             public boolean isKing() {
                 return true;
@@ -145,10 +149,14 @@ public abstract class Piece {
         };
         private String pieceName; //Each enum constant has an associated
 
+        private int pieceValue;
 
-        PieceType(final String pieceName) { //The constructor initializes the pieceName field for each enum constant.
+
+        PieceType(final int pieceValue,final String pieceName) { //The constructor initializes the pieceName field for each enum constant.
             this.pieceName = pieceName;
+            this.pieceValue = pieceValue;
         }
+
         @Override
         public String toString() {
             return this.pieceName;
@@ -157,6 +165,14 @@ public abstract class Piece {
         public abstract boolean isKing();
 
         public abstract boolean isRook();
+
+        public int getPieceValue() {
+            return this.pieceValue;
+        }
+
+        public String getPieceName() {
+            return pieceName;
+        }
     }
 
 }
