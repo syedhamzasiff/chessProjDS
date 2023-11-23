@@ -23,6 +23,7 @@ public final class Board {
     private final WhitePlayer whitePlayer;
     private final BlackPlayer blackPlayer;
     private final Player currentPlayer;
+    private final Pawn enPassantPawn;
 
 
     @Override
@@ -44,7 +45,7 @@ public final class Board {
         //populate a list of tiles numbered 0-63
         this.whitePieces = calculateActivePieces(this.gameBoard, Alliance.WHITE);
         this.blackPieces = calculateActivePieces(this.gameBoard, Alliance.BLACK);
-
+        this.enPassantPawn = builder.enPassantPawn;
         final Collection<Move> whiteStandardLegalMoves = calculateLegalMove(this.whitePieces);
         final Collection<Move> blackStandardLegalMoves = calculateLegalMove(this.blackPieces);
 
@@ -166,6 +167,10 @@ public final class Board {
         allLegalMoves.addAll(blackPlayer.getLegalMoves());
 
         return Collections.unmodifiableList(allLegalMoves);
+    }
+
+    public Pawn getEnPassantPawn() {
+        return this.enPassantPawn;
     }
 
     /*
