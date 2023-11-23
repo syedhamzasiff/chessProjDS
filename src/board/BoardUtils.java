@@ -1,9 +1,6 @@
 package board;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class BoardUtils {
     public static final boolean[] FIRST_COLUMN = initColumn(0);
@@ -25,6 +22,7 @@ public class BoardUtils {
 
     public static final List<String> ALGEBRAIC_NOTATION = initializeAlgebraicNotation();
     public static final Map<String, Integer> POSITION_TO_COORDINATE = initializePositionToCoordinateMap();
+
 
     private BoardUtils() {
         throw new RuntimeException("You cannot instantiate me!");
@@ -76,7 +74,11 @@ public class BoardUtils {
     }
 
     private static Map<String, Integer> initializePositionToCoordinateMap() {
-        return null; // TODO vid 37 ended here
+        final Map<String, Integer> positionToCoordinate = new HashMap<>();
+        for (int i = 0; i < NUM_TILES; i++) {
+            positionToCoordinate.put(ALGEBRAIC_NOTATION.get(i), i);
+        }
+        return Map.copyOf(positionToCoordinate);
     }
 
 
