@@ -74,6 +74,10 @@ public abstract class Piece {
         return this.cachedHashCode;
     }
 
+    public int locationBonus() {
+        return 0;
+    }
+
     public enum PieceType{
         /*
         This code defines an enumeration (enum) in Java called PieceType,
