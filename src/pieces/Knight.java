@@ -50,8 +50,7 @@ public class Knight extends Piece{
                 }
             }
         }
-        //return ImmutableList.copyOf(legalMoves);
-        return null; // had to do this cos line 42 giving error
+        return List.copyOf(legalMoves);
     }
 
     @Override

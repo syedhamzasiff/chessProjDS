@@ -91,7 +91,7 @@ public class Pawn extends Piece{
                 }
             }
         }
-        return  null;
+        return List.copyOf(legalMoves);
     }
 
     @Override

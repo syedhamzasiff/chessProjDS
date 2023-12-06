@@ -54,8 +54,7 @@ public class Bishop extends Piece{
                 }
             }
         }
-        //return ImmutableList.copyOf(legalMoves);
-        return null; // had to do this cos line 46 giving error
+        return List.copyOf(legalMoves);
     }
 
     @Override

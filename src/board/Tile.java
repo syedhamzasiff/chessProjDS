@@ -24,10 +24,7 @@ public abstract class Tile {
         for (int i = 0; i < BoardUtils.NUM_TILES; i++) {
             emptyTileMap.put(i, new EmptyTile(i));
         }
-
-        return emptyTileMap;
-        //immutable map
-        //return ImmutableMap.copyOf(emptyTileMap);
+        return Map.copyOf(emptyTileMap);
     }
 
     //the only method that will be used to create a tile will be this tile method

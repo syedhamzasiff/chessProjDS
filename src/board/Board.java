@@ -6,10 +6,7 @@ import player.BlackPlayer;
 import player.Player;
 import player.WhitePlayer;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public final class Board {
     /*
@@ -161,6 +158,8 @@ public final class Board {
     public Player currentPlayer() {
         return this.currentPlayer;
     }
+
+
     public List<Move> getAllLegalMoves() {
         List<Move> allLegalMoves = new ArrayList<>();
         allLegalMoves.addAll(whitePlayer.getLegalMoves());
@@ -173,14 +172,41 @@ public final class Board {
         return this.enPassantPawn;
     }
 
-    /*
+    /*public Iterable<Move> getAllLegalMoves() {
+        return Iterables.unmodifiableIterable(Iterables.concat(this.whitePlayer.getLegalMoves(), this.blackPlayer.getLegalMoves()));
+    }*/
+
+/*         in summary, this method is returning an unmodifiable iterable containing all legal moves from both the white player and the black player in the game. This design choice ensures that the returned iterable cannot be modified externally, providing a level of immutability to the collection of legal moves.
+        In summary, while Iterable is a more general interface that represents any collection that can be iterated, List is a more specific interface representing an ordered collection with index-based access. All lists are iterable, but not all iterables are lists*/
+
+    // Assuming Move is the type returned by getLegalMoves()
+
     public Iterable<Move> getAllLegalMoves() {
-        return Iterables.unmodifiableIterable(Iterables.concat(this.whitePlayer.getLegalMoves(), this.blackPlayer.getLegalMoves()))):
+        return new Iterable<Move>() {
+            @Override
+            public Iterator<Move> iterator() {
+                return new Iterator<Move>() {
+                    private Iterator<Move> whiteIterator = whitePlayer.getLegalMoves().iterator();
+                    private Iterator<Move> blackIterator = blackPlayer.getLegalMoves().iterator();
 
-         in summary, this method is returning an unmodifiable iterable containing all legal moves from both the white player and the black player in the game. This design choice ensures that the returned iterable cannot be modified externally, providing a level of immutability to the collection of legal moves.
-        In summary, while Iterable is a more general interface that represents any collection that can be iterated, List is a more specific interface representing an ordered collection with index-based access. All lists are iterable, but not all iterables are lists
+                    @Override
+                    public boolean hasNext() {
+                        return whiteIterator.hasNext() || blackIterator.hasNext();
+                    }
 
-     */
+                    @Override
+                    public Move next() {
+                        if (whiteIterator.hasNext()) {
+                            return whiteIterator.next();
+                        } else {
+                            return blackIterator.next();
+                        }
+                    }
+                };
+            }
+        };
+    }
+
 
 
 }
